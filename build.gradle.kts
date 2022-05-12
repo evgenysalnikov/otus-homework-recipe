@@ -1,2 +1,14 @@
-group = "org.example"
-version = "1.0-SNAPSHOT"
+group = "com.salnikoff.recipe"
+version = "0.0.1"
+
+plugins {
+    kotlin("jvm") apply false
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
