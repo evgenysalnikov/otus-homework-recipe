@@ -18,5 +18,5 @@ data class RecipeContext(
     var recipeRequest: Recipe = Recipe(),
     var recipeFilterRequest: RecipeFilter = RecipeFilter(),
     var recipeResponse: Recipe = Recipe(),
-    var recipesResponse: List<Recipe> = mutableListOf()
+    var recipesResponse: MutableList<Recipe> = mutableListOf()
 )

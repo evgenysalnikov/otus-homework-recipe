@@ -58,3 +58,6 @@
 2. [recipe-api-v1](recipe-api-v1) - генерация первой версии транспортных моделей для KMP
 3. [recipe-common](recipe-common) - модуль с общими классами для модулей проекта. Тут также внутренние модели и контекст
 4. [recipe-mappers-v1](recipe-mappers-v1) - мапперы между recipe-api-v1 и внутренними моделями в recipe-common
+5. [recipe-stubs](recipe-stubs) - модуль со стабами для тестирования
+5. [recipe-services](recipe-services) - модуль для бизнес логики
+5. [recipe-app-ktor](recipe-app-ktor) - приложение с использованием фреймворка Ktor

@@ -18,3 +18,6 @@ pluginManagement {
 include("recipe-api-v1")
 include("recipe-common")
 include("recipe-mappers-v1")
+include("recipe-services")
+include("recipe-stubs")
+include("recipe-app-ktor")
