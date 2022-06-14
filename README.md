@@ -61,3 +61,5 @@
 5. [recipe-stubs](recipe-stubs) - модуль со стабами для тестирования
 5. [recipe-services](recipe-services) - модуль для бизнес логики
 5. [recipe-app-ktor](recipe-app-ktor) - приложение с использованием фреймворка Ktor
+5. [recipe-biz](recipe-biz) - модуль с описанием бизнес логики на COR
+5. [chain-of-responsibility](chain-of-responsibility) - реализация chain of responsibility

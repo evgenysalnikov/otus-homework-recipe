@@ -36,7 +36,7 @@ object Pie {
 
     fun getModel(model: (Recipe.() -> Unit)? = null) = model?.let { stubReady().apply(it) } ?: stubReady()
 
-    fun getModels() = listOf(
+    fun getModels() = mutableListOf(
         stubReady(),
         stubInProgress()
     )

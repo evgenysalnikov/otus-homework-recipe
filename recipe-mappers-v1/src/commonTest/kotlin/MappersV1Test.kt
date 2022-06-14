@@ -119,7 +119,7 @@ class MappersV1Test {
         val context = RecipeContext(
             requestId = RecipeRequestId("some_request_id"),
             command = RecipeCommand.SEARCH,
-            recipesResponse = listOf(Recipe(
+            recipesResponse = mutableListOf(Recipe(
                 id = RecipeId("my_recipe_id"),
                 title = "Title",
                 description = "description",

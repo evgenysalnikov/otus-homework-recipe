@@ -12,4 +12,18 @@ data class Recipe(
     var visibility: RecipeVisibility = RecipeVisibility.NONE,
     var steps: String = "",
     val permissionsClient: MutableSet<RecipePermissionClient> = mutableSetOf()
-)
+) {
+    fun deepCopy(): Recipe = Recipe(
+        id = this@Recipe.id,
+        title = this@Recipe.title,
+        description = this@Recipe.description,
+        requirements = this@Recipe.requirements.deepCopy(),
+        duration = this@Recipe.duration,
+        ownerId = this@Recipe.ownerId,
+        visibility = this@Recipe.visibility,
+        steps = this@Recipe.steps,
+        permissionsClient = this@Recipe.permissionsClient
+    )
+}
+
+fun List<RecipeRequirement>.deepCopy(): List<RecipeRequirement> = this.map { RecipeRequirement(it.asString()) }.toList()
