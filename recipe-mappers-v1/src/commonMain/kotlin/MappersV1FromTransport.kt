@@ -112,6 +112,8 @@ private fun RecipeContext.fromTransport(request: RecipeApiRecipeSearchRequest) {
     command = RecipeCommand.SEARCH
     requestId = request.requestId()
     recipeFilterRequest = request.recipeFilter.toInternal()
+    workMode = request.debug.transportToWorkMode()
+    stubCase = request.debug.transportToStubCase()
 }
 
 private fun RecipeApiRecipeSearchFilter?.toInternal() : RecipeFilter = RecipeFilter(

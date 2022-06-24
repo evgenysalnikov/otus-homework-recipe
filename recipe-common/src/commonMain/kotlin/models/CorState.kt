@@ -4,4 +4,5 @@ enum class CorState {
     NONE,
     RUNNING,
     FAILING,
+    FINISHING
 }
