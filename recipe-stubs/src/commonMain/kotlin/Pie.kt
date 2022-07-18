@@ -31,7 +31,8 @@ object Pie {
         ownerId = UserId("kitchenOwnerId"),
         visibility = RecipeVisibility.VISIBLE_PUBLIC,
         steps = "SomePieRecipe recipe description. How to do it and so on",
-        permissionsClient = mutableSetOf(RecipePermissionClient.MAKE_VISIBLE_GROUP)
+        permissionsClient = mutableSetOf(RecipePermissionClient.MAKE_VISIBLE_GROUP),
+        lock = RecipeLock("stub-recipe-in-progress")
     )
 
     fun getModel(model: (Recipe.() -> Unit)? = null) = model?.let { stubReady().apply(it) } ?: stubReady()

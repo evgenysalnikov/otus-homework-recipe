@@ -21,6 +21,8 @@ kotlin {
                 implementation(project(":recipe-common"))
                 implementation(project(":recipe-stubs"))
                 implementation(project(":chain-of-responsibility"))
+
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
             }
         }
         val commonTest by getting {
@@ -39,6 +41,7 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
+                implementation(project(":recipe-repo-inmemory"))
             }
         }
     }

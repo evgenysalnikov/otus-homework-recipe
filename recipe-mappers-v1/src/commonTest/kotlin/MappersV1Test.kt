@@ -70,7 +70,7 @@ class MappersV1Test {
     fun fromTransportRecipeApiUpdateRequestTest() {
         val recipeUpdateRequest = RecipeApiRecipeUpdateRequest(
             requestId = "my_request_id",
-            recipe = RecipeApiRecipeUpdateObject(
+            recipe = RecipeApiRecipeUpdateWithLockObject(
                 id = "updated_recipe_id",
                 title = "Title",
                 description = "description",
@@ -83,7 +83,8 @@ class MappersV1Test {
                 ),
                 ownerId = "ownerId",
                 visibility = RecipeApiRecipeVisibility.PUBLIC,
-                steps = "My recipe description. How to do it and so on"
+                steps = "My recipe description. How to do it and so on",
+                lock = "22222-22222-22222-22222"
             ),
             debug = RecipeApiDebug(
                 mode = RecipeApiRequestDebugMode.PROD,
@@ -100,8 +101,8 @@ class MappersV1Test {
     fun fromTransportRecipeApiDeleteRequestTest() {
         val recipeDeleteRequest = RecipeApiRecipeDeleteRequest(
             requestId = "my_delete_request",
-            recipe = RecipeApiBaseWithId(
-                recipe = RecipeApiBaseWithIdRecipe("recipe_id")
+            recipe = RecipeApiBaseWithIdAndLock(
+                recipe = RecipeApiBaseWithIdAndLockRecipe(id = "recipe_id", lock = "22222-22222-22222-22222")
             ),
             debug = RecipeApiDebug(
                 mode = RecipeApiRequestDebugMode.PROD,
@@ -130,7 +131,7 @@ class MappersV1Test {
                 duration = 3.0.minutes,
                 ownerId = UserId("ownerId"),
                 visibility = RecipeVisibility.VISIBLE_PUBLIC,
-                steps = "My recipe description. How to do it and so on"
+                steps = "My recipe description. How to do it and so on",
             )),
             errors = mutableListOf(
                 RecipeError(

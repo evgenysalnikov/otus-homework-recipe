@@ -2,10 +2,13 @@ package com.salnikoff.recipe.backend.services
 
 import com.salnikoff.recipe.biz.RecipeProcessor
 import com.salnikoff.recipe.common.RecipeContext
+import com.salnikoff.recipe.common.models.RecipeSettings
 
-class RecipeService {
+class RecipeService(
+    val settings: RecipeSettings
+) {
 
-    val processor = RecipeProcessor()
+    val processor = RecipeProcessor(settings)
 
     suspend fun exec(context: RecipeContext) = processor.exec(context)
 

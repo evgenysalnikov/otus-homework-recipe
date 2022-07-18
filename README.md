@@ -64,6 +64,9 @@
 5. [recipe-biz](recipe-biz) - модуль с описанием бизнес логики на COR
 5. [chain-of-responsibility](chain-of-responsibility) - реализация chain of responsibility
 5. [recipe-app-kafka](recipe-app-kafka) - приложение для работы с kafka
+5. [recipe-repo-inmemory](recipe-repo-inmemory) - репозиторий в оперативной памяти
+5. [recipe-repo-sql](recipe-repo-sql) - репозиторий с сохранением в sql
+5. [recipe-repo-gremlin](recipe-repo-gremlin) - репозиторий gremlin
 
 ## Docker
 ### Запустить kafka
@@ -75,3 +78,7 @@ docker-compose -f dockers/docker-compose-kafka.yaml up -d
 ```
 docker-compose -f dockers/docker-compose-kafka.yaml down
 ```
+
+### Запуск ktor
+`./gradlew :recipe-app-ktor:dockerBuildImage`
+`docker-compose -f dockers/docker-compose-ktor.yaml up`

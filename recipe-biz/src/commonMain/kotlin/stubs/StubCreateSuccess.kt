@@ -5,6 +5,7 @@ import com.salnikoff.recipe.chain.handlers.worker
 import com.salnikoff.recipe.common.RecipeContext
 import com.salnikoff.recipe.common.models.CorState
 import com.salnikoff.recipe.common.models.RecipeId
+import com.salnikoff.recipe.common.models.RecipeLock
 import com.salnikoff.recipe.common.stubs.RecipeStubs
 import com.salnikoff.recipe.stubs.Pie
 
@@ -18,6 +19,7 @@ fun ICorChainDsl<RecipeContext>.stubCreateSuccess(title: String, description: St
         val stub = Pie.getModel() {
             id = RecipeId("create recipe biz")
             steps = "success create"
+            lock = RecipeLock("update-recipe-lock")
         }
 
         recipeResponse = stub

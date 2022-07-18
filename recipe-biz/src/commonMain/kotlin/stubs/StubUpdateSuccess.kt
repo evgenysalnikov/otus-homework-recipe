@@ -4,6 +4,7 @@ import com.salnikoff.recipe.chain.ICorChainDsl
 import com.salnikoff.recipe.chain.handlers.worker
 import com.salnikoff.recipe.common.RecipeContext
 import com.salnikoff.recipe.common.models.CorState
+import com.salnikoff.recipe.common.models.RecipeLock
 import com.salnikoff.recipe.common.stubs.RecipeStubs
 import com.salnikoff.recipe.stubs.Pie
 
@@ -17,6 +18,7 @@ fun ICorChainDsl<RecipeContext>.stubUpdateSuccess(title: String, description: St
         val stub = Pie.getModel() {
             id = recipeRequest.id
             steps = "success update"
+            lock = RecipeLock("update-recipe-lock")
         }
 
         recipeResponse = stub

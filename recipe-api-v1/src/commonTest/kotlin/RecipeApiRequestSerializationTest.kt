@@ -52,7 +52,7 @@ class RecipeApiRequestSerializationTest {
             debug = RecipeApiDebug(
                 mode = RecipeApiRequestDebugMode.PROD,
                 stub = RecipeApiRequestDebugStubs.BAD_ID
-            )
+            ),
         )
 
         val jsonString = recipeApiV1RequestSerialize(readRequest)
@@ -74,7 +74,7 @@ class RecipeApiRequestSerializationTest {
 
         val updateRequest = RecipeApiRecipeUpdateRequest(
             requestId = "my_request_id",
-            recipe = RecipeApiRecipeUpdateObject(
+            recipe = RecipeApiRecipeUpdateWithLockObject(
                 id = "updated_recipe_id",
                 title = "Title",
                 description = "description",
@@ -87,54 +87,62 @@ class RecipeApiRequestSerializationTest {
                 ),
                 ownerId = "ownerId",
                 visibility = RecipeApiRecipeVisibility.PUBLIC,
-                steps = "Step`s description or how to reproduce"
+                steps = "Step`s description or how to reproduce",
+                lock = "11111-11111-11111-11111"
             ),
             debug = RecipeApiDebug(
                 mode = RecipeApiRequestDebugMode.PROD,
                 stub = RecipeApiRequestDebugStubs.BAD_ID
-            )
+            ),
         )
 
         val jsonString = recipeApiV1RequestSerialize(updateRequest)
         assertContains(jsonString, """"id":"updated_recipe_id"""")
         assertContains(jsonString, """"requestType":"update"""")
+        assertContains(jsonString, """"lock":"11111-11111-11111-11111"""")
     }
 
     @Test
     fun recipeUpdateRequestDeserializationTest() {
         val jsonString =
-            "{\"requestType\":\"update\",\"requestId\":\"my_request_id\",\"debug\":{\"mode\":\"prod\",\"stub\":\"badId\"},\"Recipe\":{\"title\":\"Title\",\"description\":\"description\",\"requirements\":[\"req1\",\"req2\"],\"duration\":{\"duration\":\"3\",\"timeunit\":\"min\"},\"ownerId\":\"ownerId\",\"visibility\":\"public\",\"steps\":\"Step`s description or how to reproduce\",\"id\":\"updated_recipe_id\"}}"
+            "{\"requestType\":\"update\",\"requestId\":\"my_request_id\",\"debug\":{\"mode\":\"prod\",\"stub\":\"badId\"},\"Recipe\":{\"title\":\"Title\",\"description\":\"description\",\"requirements\":[\"req1\",\"req2\"],\"duration\":{\"duration\":\"3\",\"timeunit\":\"min\"},\"ownerId\":\"ownerId\",\"visibility\":\"public\",\"steps\":\"Step`s description or how to reproduce\",\"id\":\"updated_recipe_id\", \"lock\":\"11111-11111-11111-11111\"}}"
         val recipeUpdateRequest = recipeApiV1RequestDeserialize<RecipeApiRecipeUpdateRequest>(jsonString)
         assertEquals("my_request_id", recipeUpdateRequest.requestId)
         assertEquals("Title", recipeUpdateRequest.recipe?.title)
         assertEquals("updated_recipe_id", recipeUpdateRequest.recipe?.id)
+        assertEquals("11111-11111-11111-11111", recipeUpdateRequest.recipe?.lock)
     }
 
     @Test
     fun recipeDeleteRequestSerializationTest() {
         val recipeDeleteRequest = RecipeApiRecipeDeleteRequest(
             requestId = "my_delete_request",
-            recipe = RecipeApiBaseWithId(
-                recipe = RecipeApiBaseWithIdRecipe("recipe_id")
+            recipe = RecipeApiBaseWithIdAndLock(
+                recipe = RecipeApiBaseWithIdAndLockRecipe(
+                    id = "recipe_id",
+                    lock = "11111-11111-11111-11111"
+                ),
             ),
             debug = RecipeApiDebug(
                 mode = RecipeApiRequestDebugMode.PROD,
                 stub = RecipeApiRequestDebugStubs.BAD_ID
-            )
+            ),
         )
 
         val jsonString = recipeApiV1RequestSerialize(recipeDeleteRequest)
         assertContains(jsonString, """"requestType":"delete"""")
         assertContains(jsonString, """"id":"recipe_id"""")
+        assertContains(jsonString, """"lock":"11111-11111-11111-11111"""")
     }
 
     @Test
     fun recipeDeleteRequestDeserializationTest() {
         val jsonString =
-            "{\"requestType\":\"delete\",\"requestId\":\"my_delete_request\",\"recipe\":{\"recipe\":{\"id\":\"recipe_id\"}},\"debug\":{\"mode\":\"prod\",\"stub\":\"badId\"}}"
+            "{\"requestType\":\"delete\",\"requestId\":\"my_delete_request\",\"recipe\":{\"recipe\":{\"id\":\"recipe_id\", \"lock\":\"11111-11111-11111-11111\"}},\"debug\":{\"mode\":\"prod\",\"stub\":\"badId\"}}"
         val recipeDeleteRequest = recipeApiV1RequestDeserialize<RecipeApiRecipeDeleteRequest>(jsonString)
         assertEquals("recipe_id", recipeDeleteRequest.recipe?.recipe?.id)
         assertEquals("my_delete_request", recipeDeleteRequest.requestId)
+        assertEquals("11111-11111-11111-11111", recipeDeleteRequest.recipe?.recipe?.lock)
     }
 
     @Test

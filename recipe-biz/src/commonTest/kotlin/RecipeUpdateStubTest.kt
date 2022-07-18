@@ -31,7 +31,8 @@ class RecipeUpdateStubTest {
                 title = title,
                 description = description,
                 visibility = vilisibility,
-                steps = steps
+                steps = steps,
+                lock = RecipeLock("update-recipe-lock")
             )
         )
 
@@ -41,6 +42,7 @@ class RecipeUpdateStubTest {
         assertEquals("pie description", ctx.recipeResponse.description)
         assertEquals(vilisibility, ctx.recipeResponse.visibility)
         assertEquals("success update", ctx.recipeResponse.steps)
+        assertEquals("update-recipe-lock", ctx.recipeResponse.lock.asString())
     }
 
     @Test
@@ -55,7 +57,8 @@ class RecipeUpdateStubTest {
                 title = "",
                 description = description,
                 visibility = vilisibility,
-                steps = steps
+                steps = steps,
+                lock = RecipeLock("update-recipe-lock")
             )
         )
 
@@ -77,7 +80,8 @@ class RecipeUpdateStubTest {
                 title = title,
                 description = "",
                 visibility = vilisibility,
-                steps = steps
+                steps = steps,
+                lock = RecipeLock("update-recipe-lock")
             )
         )
 
@@ -99,7 +103,8 @@ class RecipeUpdateStubTest {
                 title = title,
                 description = description,
                 visibility = vilisibility,
-                steps = steps
+                steps = steps,
+                lock = RecipeLock("update-recipe-lock")
             )
         )
 

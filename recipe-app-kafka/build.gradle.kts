@@ -58,6 +58,8 @@ dependencies {
     implementation(project(":recipe-api-v1"))
     implementation(project(":recipe-services"))
     implementation(project(":recipe-biz"))
+    implementation(project(":recipe-repo-inmemory"))
+    implementation(project(":recipe-repo-gremlin"))
 
     testImplementation(kotlin("test-junit"))
     testImplementation("org.testcontainers:kafka:$testContainersVersion")
