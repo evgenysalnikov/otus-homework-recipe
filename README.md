@@ -63,3 +63,15 @@
 5. [recipe-app-ktor](recipe-app-ktor) - приложение с использованием фреймворка Ktor
 5. [recipe-biz](recipe-biz) - модуль с описанием бизнес логики на COR
 5. [chain-of-responsibility](chain-of-responsibility) - реализация chain of responsibility
+5. [recipe-app-kafka](recipe-app-kafka) - приложение для работы с kafka
+
+## Docker
+### Запустить kafka
+```
+docker-compose -f dockers/docker-compose-kafka.yaml up -d
+```
+
+### Остановить kafka
+```
+docker-compose -f dockers/docker-compose-kafka.yaml down
+```
