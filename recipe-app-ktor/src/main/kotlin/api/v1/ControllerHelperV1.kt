@@ -28,7 +28,7 @@ suspend inline fun <reified Q : IRecipeApiRequest, reified R : IRecipeApiRespons
         val response = ctx.toTransport()
         respond(response)
     } catch (e: Throwable) {
-        command?.also { ctx.command = it }
+        command.also { ctx.command = it }
         ctx.state = CorState.FAILING
         ctx.errors.add(e.asRecipeError())
         ctx.block()

@@ -5,6 +5,7 @@ pluginManagement {
         val kotlinVersion: String by settings
         val kotestVersion: String by settings
         val openapiVersion: String by settings
+        val bmuschkoVersion: String by settings
 
         kotlin("jvm") version kotlinVersion apply false
         kotlin("multiplatfrom") version kotlinVersion apply false
@@ -12,6 +13,9 @@ pluginManagement {
         kotlin("plugin.serialization") version kotlinVersion apply false
 
         id("org.openapi.generator") version openapiVersion apply false
+
+        id("com.bmuschko.docker-java-application") version bmuschkoVersion apply false
+        id("com.bmuschko.docker-remote-api") version bmuschkoVersion apply false
     }
 }
 
@@ -23,3 +27,4 @@ include("recipe-stubs")
 include("recipe-app-ktor")
 include("chain-of-responsibility")
 include("recipe-biz")
+include("recipe-app-kafka")
