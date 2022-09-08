@@ -11,7 +11,9 @@ data class Recipe(
     var ownerId: UserId = UserId.NONE,
     var visibility: RecipeVisibility = RecipeVisibility.NONE,
     var steps: String = "",
-    val permissionsClient: MutableSet<RecipePermissionClient> = mutableSetOf()
+    val permissionsClient: MutableSet<RecipePermissionClient> = mutableSetOf(),
+    var lock: RecipeLock = RecipeLock.NONE,
+    var principalRelations: Set<RecipePrincipalRelations> = emptySet(),
 ) {
     fun deepCopy(): Recipe = Recipe(
         id = this@Recipe.id,
@@ -22,8 +24,17 @@ data class Recipe(
         ownerId = this@Recipe.ownerId,
         visibility = this@Recipe.visibility,
         steps = this@Recipe.steps,
-        permissionsClient = this@Recipe.permissionsClient
+        permissionsClient = this@Recipe.permissionsClient,
+        lock = this@Recipe.lock.deepCopy()
     )
 }
 
 fun List<RecipeRequirement>.deepCopy(): List<RecipeRequirement> = this.map { RecipeRequirement(it.asString()) }.toList()
+
+fun RecipeLock?.deepCopy(): RecipeLock {
+    if (this == null) {
+        return RecipeLock.NONE
+    } else {
+        return RecipeLock(this.asString())
+    }
+}

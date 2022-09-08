@@ -8,7 +8,7 @@ import com.salnikoff.recipe.common.models.*
 fun ICorChainDsl<RecipeContext>.validateIdProperFormat(title: String, description: String) = worker {
     this.title = title
     this.description = description
-    val regExp = Regex("^[0-9a-zA-Z-]+$")
+    val regExp = Regex("^[0-9a-zA-Z-#:]+$")
     on { recipeValidating.id != RecipeId.NONE && !recipeValidating.id.asString().matches(regExp) }
     handle {
         val encodedId = recipeValidating.id.asString()

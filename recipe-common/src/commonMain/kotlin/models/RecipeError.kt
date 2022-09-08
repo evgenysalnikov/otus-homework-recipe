@@ -8,6 +8,7 @@ data class RecipeError(
     val field: String = "",
     val message: String = "",
     val exception: Throwable? = null,
+    val level: RecipeErrorLevels = RecipeErrorLevels.ERROR
 )
 
 fun Throwable.asRecipeError(

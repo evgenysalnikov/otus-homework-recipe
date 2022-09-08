@@ -1,0 +1,24 @@
+version: "3.3"
+services:
+  app:
+    image: recipe-app-ktor:0.0.1
+    ports:
+      - "8080:8080"
+
+#  arcadedb:
+#    image: arcadedata/arcadedb
+#    expose:
+#      - 2424
+#      - 2480
+#      - 8182
+#    environment:
+#      arcadedb.server.rootPassword: recipe2022bigpassword
+#      arcadedb.server.plugins: GremlinServer:com.arcadedb.server.gremlin.GremlinServerPlugin
+
+  sql:
+    image: postgres
+    environment:
+      POSTGRES_USER: recipe
+      POSTGRES_PASSWORD: recipe-pass
+      POSTGRES_DB: recipedb
+

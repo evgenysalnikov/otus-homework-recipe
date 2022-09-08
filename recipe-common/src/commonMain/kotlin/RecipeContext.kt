@@ -1,6 +1,7 @@
 package com.salnikoff.recipe.common
 
 import com.salnikoff.recipe.common.models.*
+import com.salnikoff.recipe.common.repo.IRecipeRepository
 import com.salnikoff.recipe.common.stubs.RecipeStubs
 import kotlinx.datetime.Instant
 
@@ -25,5 +26,15 @@ data class RecipeContext(
     var recipeFilterValidated: RecipeFilter = RecipeFilter(),
 
     var recipeResponse: Recipe = Recipe(),
-    var recipesResponse: MutableList<Recipe> = mutableListOf()
+    var recipesResponse: MutableList<Recipe> = mutableListOf(),
+
+    var recipeRepo: IRecipeRepository = IRecipeRepository.NONE,
+    var settings: RecipeSettings = RecipeSettings(),
+    var principal: RecipePrincipalModel = RecipePrincipalModel.NONE,
+    val chainPermissions: MutableSet<RecipeUserPermissions> = mutableSetOf(),
+    var permitted: Boolean = false,
+    var recipeRepoRead: Recipe = Recipe(),
+    var recipeRepoPrepare: Recipe = Recipe(),
+    var recipeRepoDone: Recipe = Recipe(),
+    var recipesRepoDone: MutableList<Recipe> = mutableListOf(),
 )

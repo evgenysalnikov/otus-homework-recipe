@@ -27,7 +27,7 @@ class RecipeReadStubTest {
             workMode = RecipeWorkMode.STUB,
             stubCase = RecipeStubs.SUCCESS,
             recipeRequest = Recipe(
-                id = id,
+                id = id
             )
         )
 

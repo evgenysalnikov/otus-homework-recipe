@@ -278,12 +278,45 @@ components:
               type: string
               description: Идентификатор рецепта
 
+    RecipeApiBaseWithIdAndLock:
+      type: object
+      properties:
+        recipe:
+          type: object
+          properties:
+            id:
+              type: string
+              description: Идентификатор рецепта
+            lock:
+              $ref: '#/components/schemas/RecipeApiLock'
+
     RecipeApiBaseRecipeIdRequest:
       type: object
       properties:
         recipe:
           allOf:
             - $ref: '#/components/schemas/RecipeApiBaseWithId'
+        debug:
+          type: object
+          properties:
+            stub:
+              type: string
+              enum:
+                - success
+                - notFound
+                - badId
+                - badTitle
+                - badDescription
+                - badVisibility
+                - cannotDelete
+                - badSearchString
+
+    RecipeApiBaseRecipeIdAndLockRequest:
+      type: object
+      properties:
+        recipe:
+          allOf:
+            - $ref: '#/components/schemas/RecipeApiBaseWithIdAndLock'
         debug:
           type: object
           properties:
@@ -335,6 +368,16 @@ components:
             id:
               type: string
 
+    RecipeApiRecipeUpdateWithLockObject:
+      allOf:
+        - $ref: '#/components/schemas/RecipeApiBaseRecipeUpdateable'
+        - type: object
+          properties:
+            id:
+              type: string
+            lock:
+              $ref: '#/components/schemas/RecipeApiLock'
+
     RecipeApiRecipeUpdateRequest:
       allOf:
         - $ref: '#/components/schemas/IRecipeApiRequest'
@@ -342,12 +385,12 @@ components:
         - type: object
           properties:
             Recipe:
-              $ref: '#/components/schemas/RecipeApiRecipeUpdateObject'
+              $ref: '#/components/schemas/RecipeApiRecipeUpdateWithLockObject'
 
     RecipeApiRecipeDeleteRequest:
       allOf:
         - $ref: '#/components/schemas/IRecipeApiRequest'
-        - $ref: '#/components/schemas/RecipeApiBaseRecipeIdRequest'
+        - $ref: '#/components/schemas/RecipeApiBaseRecipeIdAndLockRequest'
         - $ref: '#/components/schemas/RecipeApiRequestDebug'
 
     RecipeApiRecipeSearchFilter:
@@ -393,6 +436,8 @@ components:
               uniqueItems: true
               items:
                 $ref: '#/components/schemas/RecipeApiRecipePermissions'
+            lock:
+              $ref: '#/components/schemas/RecipeApiLock'
 
     RecipeApiRecipeResponseSingle:
       allOf:
@@ -467,4 +512,8 @@ components:
         - badVisibility
         - cannotDelete
         - badSearchString
+
+    RecipeApiLock:
+      type: string
+      description: Оптимистичная блокировка для рецепта, характеризующая его версию
 

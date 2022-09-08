@@ -85,33 +85,41 @@ private fun Recipe.toTransportRecipe() : RecipeApiRecipeResponseObject  = Recipe
     ownerId = ownerId.asString(),
     visibility = visibility.toTransportRecipe(),
     steps = steps,
-    permissions = permissionsClient.toTransportRecipe()
+    permissions = permissionsClient.toTransportRecipe(),
+    lock = lock.takeIf { it != RecipeLock.NONE }?.asString()
 )
+
+private fun CorState.toRecipeApiResponseResult(): RecipeApiResponseResult = when(this) {
+    CorState.RUNNING -> RecipeApiResponseResult.SUCCESS
+    CorState.FINISHING -> RecipeApiResponseResult.SUCCESS
+    else -> RecipeApiResponseResult.ERROR
+}
+
 
 private fun RecipeContext.toTransportCreate() : RecipeApiRecipeCreateResponse = RecipeApiRecipeCreateResponse(
     requestId = this.requestId.asString().takeIf { it.isNotBlank() },
-    result = if (state == CorState.RUNNING) RecipeApiResponseResult.SUCCESS else RecipeApiResponseResult.ERROR,
+    result = state.toRecipeApiResponseResult(),
     errors = errors.toTransportErrors(),
     recipe = recipeResponse.toTransportRecipe()
 )
 
 private fun RecipeContext.toTransportRead(): RecipeApiRecipeReadResponse = RecipeApiRecipeReadResponse(
     requestId = this.requestId.asString().takeIf { it.isNotBlank() },
-    result = if (state == CorState.RUNNING) RecipeApiResponseResult.SUCCESS else RecipeApiResponseResult.ERROR,
+    result = state.toRecipeApiResponseResult(),
     errors = errors.toTransportErrors(),
     recipe = recipeResponse.toTransportRecipe()
 )
 
 private fun RecipeContext.toTransportUpdate(): RecipeApiRecipeUpdateResponse = RecipeApiRecipeUpdateResponse(
     requestId = this.requestId.asString().takeIf { it.isNotBlank() },
-    result = if (state == CorState.RUNNING) RecipeApiResponseResult.SUCCESS else RecipeApiResponseResult.ERROR,
+    result = state.toRecipeApiResponseResult(),
     errors = errors.toTransportErrors(),
     recipe = recipeResponse.toTransportRecipe()
 )
 
 private fun RecipeContext.toTransportDelete(): RecipeApiRecipeDeleteResponse = RecipeApiRecipeDeleteResponse(
     requestId = this.requestId.asString().takeIf { it.isNotBlank() },
-    result = if (state == CorState.RUNNING) RecipeApiResponseResult.SUCCESS else RecipeApiResponseResult.ERROR,
+    result = state.toRecipeApiResponseResult(),
     errors = errors.toTransportErrors(),
     recipe = recipeResponse.toTransportRecipe()
 )
@@ -124,7 +132,7 @@ private fun List<Recipe>.toTransportRecipe(): List<RecipeApiRecipeResponseObject
 
 private fun RecipeContext.toTransportSearch(): RecipeApiRecipeSearchResponse = RecipeApiRecipeSearchResponse(
     requestId = this.requestId.asString().takeIf { it.isNotBlank() },
-    result = if (state == CorState.RUNNING) RecipeApiResponseResult.SUCCESS else RecipeApiResponseResult.ERROR,
+    result = if (state == CorState.RUNNING || state == CorState.FINISHING) RecipeApiResponseResult.SUCCESS else RecipeApiResponseResult.ERROR,
     errors = errors.toTransportErrors(),
     recipes = recipesResponse.toTransportRecipe()
 )

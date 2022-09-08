@@ -28,6 +28,7 @@ class RecipeDeleteStubTest {
             stubCase = RecipeStubs.SUCCESS,
             recipeRequest = Recipe(
                 id = id,
+                lock = RecipeLock("delete-recipe-lock")
             )
         )
 
@@ -38,6 +39,7 @@ class RecipeDeleteStubTest {
         assertEquals("pie description", ctx.recipeResponse.description)
         assertEquals(vilisibility, ctx.recipeResponse.visibility)
         assertEquals("success delete", ctx.recipeResponse.steps)
+        assertEquals("delete-recipe-lock", ctx.recipeResponse.lock.asString())
     }
 
     @Test

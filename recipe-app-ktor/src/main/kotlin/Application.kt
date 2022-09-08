@@ -4,6 +4,9 @@ import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.salnikoff.recipe.app.ktor.api.v1
 import com.salnikoff.recipe.backend.services.RecipeService
+import com.salnikoff.recipe.common.models.RecipeSettings
+import com.salnikoff.recipe.repo.inmemory.RecipeRepoInMemory
+import com.salnikoff.recipe.repo.sql.RecipeRepoSQL
 import io.ktor.http.*
 import io.ktor.serialization.jackson.*
 import io.ktor.server.application.*
@@ -24,7 +27,9 @@ fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 
 @OptIn(KtorExperimentalLocationsAPI::class)
-fun Application.module() {
+fun Application.module(
+    settings: RecipeSettings? = null
+) {
     install(Routing)
     install(CachingHeaders)
     install(DefaultHeaders)
@@ -56,7 +61,14 @@ fun Application.module() {
 
     install(Locations)
 
-    val recipeService = RecipeService()
+    val corSettings by lazy {
+        settings ?: RecipeSettings(
+            repoTest = RecipeRepoInMemory(),
+            repoProd = RecipeRepoSQL(url = "jdbc:postgresql://sql:5432/recipedb")
+        )
+    }
+
+    val recipeService = RecipeService(corSettings)
 
     routing {
         get("/") {

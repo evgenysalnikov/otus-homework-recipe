@@ -58,7 +58,26 @@ private fun RecipeApiRecipeUpdateObject.toInternal(): Recipe = Recipe(
     visibility = this.visibility.fromTransport(),
     steps = this.steps?: ""
 )
+
+private fun String?.toRecipeLock() : RecipeLock {
+    if (this == null || this.isEmpty()) {
+        return RecipeLock.NONE
+    } else return RecipeLock(this)
+}
+
+private fun RecipeApiRecipeUpdateWithLockObject.toInternal(): Recipe = Recipe(
+    id = this.id.toRecipeId(),
+    title = this.title ?: "",
+    description = this.description ?: "",
+    requirements = this.requirements?.toRecipeRequirements() ?: listOf(),
+    duration = this.duration?.toInternal() ?: Duration.ZERO,
+    ownerId = this.ownerId?.toRecipeUserId() ?: UserId.NONE,
+    visibility = this.visibility.fromTransport(),
+    steps = this.steps?: "",
+    lock = this.lock.toRecipeLock()
+)
 private fun RecipeApiBaseWithId?.toRecipeWithId(): Recipe = Recipe(id = this?.recipe?.id.toRecipeId())
+private fun RecipeApiBaseWithIdAndLock?.toRecipeWithIdAndLock(): Recipe = Recipe(id = this?.recipe?.id.toRecipeId(), lock = this?.recipe?.lock.toRecipeLock())
 private fun RecipeApiDebug?.transportToWorkMode(): RecipeWorkMode = when(this?.mode) {
     RecipeApiRequestDebugMode.PROD -> RecipeWorkMode.PROD
     RecipeApiRequestDebugMode.TEST -> RecipeWorkMode.TEST
@@ -103,7 +122,7 @@ private fun RecipeContext.fromTransport(request: RecipeApiRecipeUpdateRequest) {
 private fun RecipeContext.fromTransport(request: RecipeApiRecipeDeleteRequest) {
     command = RecipeCommand.DELETE
     requestId = request.requestId()
-    recipeRequest = request.recipe.toRecipeWithId()
+    recipeRequest = request.recipe.toRecipeWithIdAndLock()
     workMode = request.debug.transportToWorkMode()
     stubCase = request.debug.transportToStubCase()
 }

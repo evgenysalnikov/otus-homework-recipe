@@ -50,7 +50,7 @@ class ApplicationTest {
         }.apply {
             assertEquals(HttpStatusCode.OK, status)
             assertContains(bodyAsText(), "recipe_create_request_id")
-            assertContains(bodyAsText(), "pie_recipe_id")
+            assertContains(bodyAsText(), "create recipe biz")
         }
     }
 
@@ -67,12 +67,12 @@ class ApplicationTest {
                       "requestId": "recipe_read_request_id",
                       "recipe": {
                         "recipe": {
-                          "id": "read_id"
+                          "id": "readId"
                         }
                       },
                       "debug": {
                         "stub": "SUCCESS",
-                        "mode": "TEST"
+                        "mode": "STUB"
                       }
                     }
                 """.trimIndent()
@@ -80,7 +80,7 @@ class ApplicationTest {
         }.apply {
             assertEquals(HttpStatusCode.OK, status)
             assertContains(bodyAsText(), "recipe_read_request_id")
-            assertContains(bodyAsText(), "read_id")
+            assertContains(bodyAsText(), "readId")
             assertContains(bodyAsText(), "pie description")
         }
     }
@@ -97,11 +97,11 @@ class ApplicationTest {
                       "requestType": "update",
                       "requestId": "recipe_update_request_id",
                       "debug": {
-                        "mode": "TEST",
+                        "mode": "STUB",
                         "stub": "SUCCESS"
                       },
                       "recipe": {
-                        "id":"updated_id",
+                        "id":"updatedId",
                         "title": "string",
                         "description": "string",
                         "requirements": [
@@ -113,7 +113,8 @@ class ApplicationTest {
                         },
                         "ownerId": "string",
                         "visibility": "OWNER_ONLY",
-                        "steps": "string"
+                        "steps": "string",
+                        "lock": "recipe-update-lock"
                       }
                     }
                 """.trimIndent()
@@ -121,8 +122,9 @@ class ApplicationTest {
         }.apply {
             assertEquals(HttpStatusCode.OK, status)
             assertContains(bodyAsText(), "recipe_update_request_id")
-            assertContains(bodyAsText(), "updated_id")
+            assertContains(bodyAsText(), "updatedId")
             assertContains(bodyAsText(), "pie description")
+            assertContains(bodyAsText(), "update-recipe-lock")
         }
     }
 
@@ -139,12 +141,13 @@ class ApplicationTest {
                       "requestId": "recipe_delete_request_id",
                       "recipe": {
                         "recipe": {
-                          "id": "delete_id"
+                          "id": "delete-id",
+                          "lock": "delete-recipe-lock"
                         }
                       },
                       "debug": {
                         "stub": "SUCCESS",
-                        "mode": "TEST"
+                        "mode": "STUB"
                       }
                     }
                 """.trimIndent()
@@ -152,7 +155,7 @@ class ApplicationTest {
         }.apply {
             assertEquals(HttpStatusCode.OK, status)
             assertContains(bodyAsText(), "recipe_delete_request_id")
-            assertContains(bodyAsText(), "delete_id")
+            assertContains(bodyAsText(), "delete-id")
             assertContains(bodyAsText(), "pie description")
         }
     }
@@ -169,7 +172,7 @@ class ApplicationTest {
                       "requestType": "search",
                       "requestId": "recipe_search_request_id",
                       "debug": {
-                        "mode": "TEST",
+                        "mode": "STUB",
                         "stub": "SUCCESS"
                       },
                       "recipeFilter": {
@@ -181,7 +184,7 @@ class ApplicationTest {
         }.apply {
             assertEquals(HttpStatusCode.OK, status)
             assertContains(bodyAsText(), "recipe_search_request_id")
-            assertContains(bodyAsText(), "foobarkeyword")
+            assertContains(bodyAsText(), "stub-recipe-in-progress")
         }
     }
 }

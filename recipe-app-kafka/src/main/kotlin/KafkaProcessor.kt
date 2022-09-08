@@ -6,6 +6,7 @@ import com.salnikoff.recipe.api.v1.recipeApiV1RequestDeserialize
 import com.salnikoff.recipe.api.v1.recipeApiV1ResponseSerialize
 import com.salnikoff.recipe.backend.services.RecipeService
 import com.salnikoff.recipe.common.RecipeContext
+import com.salnikoff.recipe.common.models.RecipeSettings
 import com.salnikoff.recipe.mappers.v1.fromTransport
 import com.salnikoff.recipe.mappers.v1.toTransport
 import kotlinx.atomicfu.atomic
@@ -28,7 +29,7 @@ private val log = KotlinLogging.logger {}
 
 class KafkaProcessor(
     val config: AppKafkaConfig,
-    private val service: RecipeService = RecipeService(),
+    private val service: RecipeService = RecipeService(RecipeSettings()),
     private val consumer: Consumer<String, String> = config.createKafkaConsumer(),
     private val producer: Producer<String, String> = config.createKafkaProducer()
 ) {
