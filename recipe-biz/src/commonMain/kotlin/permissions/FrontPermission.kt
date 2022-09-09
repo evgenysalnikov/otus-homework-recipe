@@ -26,7 +26,7 @@ fun ICorChainDsl<RecipeContext>.frontPermissions(title: String) = chain {
                         RecipePermissionClient.UPDATE,
                         RecipePermissionClient.DELETE,
                     )
-                    RecipeUserGroups.MODERATOR_MP -> setOf()
+                    RecipeUserGroups.MODERATOR -> setOf()
                     RecipeUserGroups.ADMIN_RECIPE -> setOf()
                     RecipeUserGroups.TEST -> setOf()
                     RecipeUserGroups.BAN_RECIPE -> setOf()
@@ -35,7 +35,7 @@ fun ICorChainDsl<RecipeContext>.frontPermissions(title: String) = chain {
             val permDel: Set<RecipePermissionClient> = principal.groups.map {
                 when (it) {
                     RecipeUserGroups.USER -> setOf()
-                    RecipeUserGroups.MODERATOR_MP -> setOf()
+                    RecipeUserGroups.MODERATOR -> setOf()
                     RecipeUserGroups.ADMIN_RECIPE -> setOf()
                     RecipeUserGroups.TEST -> setOf()
                     RecipeUserGroups.BAN_RECIPE -> setOf(
@@ -57,7 +57,7 @@ fun ICorChainDsl<RecipeContext>.frontPermissions(title: String) = chain {
             val permAdd: Set<RecipePermissionClient> = principal.groups.map {
                 when (it) {
                     RecipeUserGroups.USER -> setOf()
-                    RecipeUserGroups.MODERATOR_MP -> setOf(
+                    RecipeUserGroups.MODERATOR -> setOf(
                         RecipePermissionClient.READ,
                         RecipePermissionClient.UPDATE,
                         RecipePermissionClient.DELETE,
@@ -73,7 +73,7 @@ fun ICorChainDsl<RecipeContext>.frontPermissions(title: String) = chain {
                         RecipePermissionClient.UPDATE,
                         RecipePermissionClient.DELETE,
                     )
-                    RecipeUserGroups.MODERATOR_MP -> setOf()
+                    RecipeUserGroups.MODERATOR -> setOf()
                     RecipeUserGroups.ADMIN_RECIPE -> setOf()
                     RecipeUserGroups.TEST -> setOf()
                     RecipeUserGroups.BAN_RECIPE -> setOf(

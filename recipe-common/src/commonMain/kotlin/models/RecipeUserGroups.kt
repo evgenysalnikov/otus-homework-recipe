@@ -3,7 +3,7 @@ package com.salnikoff.recipe.common.models
 enum class RecipeUserGroups {
     USER,
     ADMIN_RECIPE,
-    MODERATOR_MP,
+    MODERATOR,
     TEST,
     BAN_RECIPE
 }

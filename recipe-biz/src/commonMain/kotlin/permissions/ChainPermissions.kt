@@ -21,8 +21,10 @@ fun ICorChainDsl<RecipeContext>.chainPermissions(title: String, description: Str
                     RecipeUserPermissions.UPDATE_OWN,
                     RecipeUserPermissions.DELETE_OWN
                 )
-                RecipeUserGroups.MODERATOR_MP -> setOf()
-                RecipeUserGroups.ADMIN_RECIPE-> setOf()
+                RecipeUserGroups.MODERATOR -> setOf()
+                RecipeUserGroups.ADMIN_RECIPE-> setOf(
+                    RecipeUserPermissions.UPDATE_PUBLIC
+                )
                 RecipeUserGroups.TEST -> setOf()
                 RecipeUserGroups.BAN_RECIPE -> setOf()
             }
@@ -31,7 +33,7 @@ fun ICorChainDsl<RecipeContext>.chainPermissions(title: String, description: Str
         val permissionsDel: Set<RecipeUserPermissions> = principal.groups.map {
             when (it) {
                 RecipeUserGroups.USER -> setOf()
-                RecipeUserGroups.MODERATOR_MP -> setOf()
+                RecipeUserGroups.MODERATOR -> setOf()
                 RecipeUserGroups.ADMIN_RECIPE-> setOf()
                 RecipeUserGroups.TEST -> setOf()
                 RecipeUserGroups.BAN_RECIPE -> setOf(

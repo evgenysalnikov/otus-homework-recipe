@@ -8,11 +8,11 @@ import kotlin.time.Duration
 import kotlin.time.DurationUnit
 
 fun RecipeContext.toTransport() : IRecipeApiResponse = when (val cmd = command) {
-    RecipeCommand.CREATE -> toTransportCreate()
-    RecipeCommand.READ -> toTransportRead()
-    RecipeCommand.UPDATE -> toTransportUpdate()
-    RecipeCommand.DELETE -> toTransportDelete()
-    RecipeCommand.SEARCH -> toTransportSearch()
+    RecipeCommand.CREATE -> toTransportCreate().copy(responseType = "create")
+    RecipeCommand.READ -> toTransportRead().copy(responseType = "read")
+    RecipeCommand.UPDATE -> toTransportUpdate().copy(responseType = "update")
+    RecipeCommand.DELETE -> toTransportDelete().copy(responseType = "delete")
+    RecipeCommand.SEARCH -> toTransportSearch().copy(responseType = "search")
     RecipeCommand.NONE -> throw UnknownRecipeCommand(cmd)
 }
 private fun MutableList<RecipeError>.toTransportErrors() : List<RecipeApiError>? = this
