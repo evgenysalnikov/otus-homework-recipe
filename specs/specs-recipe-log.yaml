@@ -1,0 +1,120 @@
+openapi: "3.0.4"
+info:
+  title: Recipe log models
+  description: Log models for logging services
+  version: 1.0.0
+paths:
+  /log:
+    get:
+      responses:
+        '200':
+          description: logs
+          content: {}
+
+components:
+  schemas:
+    CommonLogModel:
+      title: Common log model
+      description: Common log model for whole project
+      type: object
+      properties:
+        messageId:
+          type: string
+        messageTime:
+          type: string
+        logId:
+          type: string
+        source:
+          type: string
+        recipe:
+          $ref: '#/components/schemas/RecipeLogModel'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ErrorLogModel'
+
+    RecipeLogModel:
+      title: Recipe log model
+      type: object
+      properties:
+        requestId:
+          type: string
+        requestRecipe:
+          $ref: '#/components/schemas/RecipeLog'
+        requestFilter:
+          $ref: '#/components/schemas/RecipeFilterLog'
+        responseRecipe:
+          $ref: '#/components/schemas/RecipeLog'
+        responseRecipes:
+          type: array
+          items:
+            $ref: '#/components/schemas/RecipeLog'
+
+    ErrorLogModel:
+      title: Error log model
+      type: object
+      properties:
+        message:
+          type: string
+        field:
+          type: string
+        code:
+          type: string
+        level:
+          type: string
+
+    RecipeLog:
+      title: Log model for recipe
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        requirements:
+          type: array
+          items:
+            type: string
+        duration:
+          $ref: '#/components/schemas/RecipeDurationLog'
+        ownerId:
+          type: string
+        visibility:
+          type: string
+        steps:
+          type: string
+        permissions:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+
+    RecipeRequirementLog:
+      title: Log model for recipe requirement
+      type: array
+      items:
+        type: string
+
+    RecipeDurationLog:
+      title: Log model for recipe duration
+      type: object
+      properties:
+        duration:
+          type: string
+        timeunit:
+          type: string
+
+    RecipeFilterLog:
+      title: Log model for filter
+      properties:
+        searchString:
+          type: string
+        ownerId:
+          type: string
+        searchTypes:
+          type: array
+          uniqueItems: true
+          items:
+            type: string

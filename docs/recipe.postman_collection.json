@@ -1,0 +1,608 @@
+{
+	"info": {
+		"_postman_id": "93ab9820-c4a0-4972-b54d-e55601f1ddf5",
+		"name": "recipe",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8617098"
+	},
+	"item": [
+		{
+			"name": "/v1/recipe/create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZWNpcGUtdXNlcnMiLCJpc3MiOiJTYWxuaWtvZmZDb20iLCJncm91cHMiOlsiVVNFUiJdLCJpZCI6IjEiLCJleHAiOjIwODI3NTg0MDB9.QTi3QsbWmT_5wwYHMDdRF95KWH6a8X7FooXIKPDMMNk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\": \"create\",\n  \"requestId\": \"ewe\",\n  \"debug\": {\n      \"mode\":\"test\"\n  },\n  \"recipe\": {\n    \"title\": \"Pie\",\n    \"description\": \"Pie with superhot pepper\",\n    \"requirements\": [\n      \"mix of beer\",\n      \"oil\",\n      \"beef\",\n      \"pepper\"\n    ],\n    \"duration\": {\n      \"duration\": \"30.3\",\n      \"timeunit\": \"sec\"\n    },\n    \"visibility\": \"public\",\n    \"steps\": \"some steps\",\n    \"ownerId\": null\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/v1/recipe/create",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"recipe",
+						"create"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "createSuccess",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"requestType\": \"create\",\n  \"requestId\": \"ewe\",\n  \"debug\": {\n      \"mode\":\"test\"\n  },\n  \"recipe\": {\n    \"title\": \"Pie\",\n    \"description\": \"Pie with superhot pepper\",\n    \"requirements\": [\n      \"mix of beer\",\n      \"oil\",\n      \"beef\",\n      \"pepper\"\n    ],\n    \"duration\": {\n      \"duration\": \"30.3\",\n      \"timeunit\": \"sec\"\n    },\n    \"visibility\": \"public\",\n    \"steps\": \"some steps\",\n    \"ownerId\": null\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/v1/recipe/create",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"recipe",
+								"create"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 06:46:40 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Ktor/2.0.1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "433"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"responseType\": \"create\",\n    \"requestId\": \"ewe\",\n    \"result\": \"success\",\n    \"errors\": null,\n    \"recipe\": {\n        \"title\": \"Pie\",\n        \"description\": \"Pie with superhot pepper\",\n        \"requirements\": [\n            \"mix of beer\",\n            \"oil\",\n            \"beef\",\n            \"pepper\"\n        ],\n        \"duration\": {\n            \"duration\": \"30.30s\",\n            \"timeunit\": \"sec\"\n        },\n        \"ownerId\": \"1\",\n        \"visibility\": \"public\",\n        \"steps\": \"some steps\",\n        \"id\": \"68229266-985e-4188-9061-2a88fb51f999\",\n        \"permissions\": [\n            \"read\",\n            \"update\",\n            \"delete\"\n        ],\n        \"lock\": \"2eec0aa6-8346-47fa-98e8-2641a9a43d70\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "/v1/recipe/update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZWNpcGUtdXNlcnMiLCJpc3MiOiJTYWxuaWtvZmZDb20iLCJncm91cHMiOlsiVVNFUiJdLCJpZCI6IjEiLCJleHAiOjIwODI3NTg0MDB9.QTi3QsbWmT_5wwYHMDdRF95KWH6a8X7FooXIKPDMMNk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"update\",\n    \"requestId\": \"12345\",\n    \"debug\": {\"mode\":\"test\"},\n    \"recipe\": {\n        \"title\": \"Пирог\",\n        \"description\": \"Острейший\",\n        \"requirements\": null,\n        \"duration\": {\n            \"duration\": \"30.3\",\n            \"timeunit\": \"sec\"\n        },\n        \"ownerId\": null,\n        \"visibility\": \"public\",\n        \"steps\": \"some steps\",\n        \"id\": \"b45bf5c7-6fb7-40d2-851f-6c9603d44f43\",\n        \"lock\": \"a83685a7-a3e2-48e9-8c2e-f3309e4aef42\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/v1/recipe/update",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"recipe",
+						"update"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "updateSuccess",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"requestType\": \"update\",\n    \"requestId\": \"12345\",\n    \"debug\": {\"mode\":\"test\"},\n    \"recipe\": {\n        \"title\": \"Пирог\",\n        \"description\": \"Острейший\",\n        \"requirements\": null,\n        \"duration\": {\n            \"duration\": \"30.3\",\n            \"timeunit\": \"sec\"\n        },\n        \"ownerId\": null,\n        \"visibility\": \"public\",\n        \"steps\": \"some steps\",\n        \"id\": \"b45bf5c7-6fb7-40d2-851f-6c9603d44f43\",\n        \"lock\": \"a83685a7-a3e2-48e9-8c2e-f3309e4aef42\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/v1/recipe/update",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"recipe",
+								"update"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 06:38:24 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Ktor/2.0.1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "403"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"responseType\": \"update\",\n    \"requestId\": \"12345\",\n    \"result\": \"success\",\n    \"errors\": null,\n    \"recipe\": {\n        \"title\": \"Пирог\",\n        \"description\": \"Острейший\",\n        \"requirements\": null,\n        \"duration\": {\n            \"duration\": \"30.30s\",\n            \"timeunit\": \"sec\"\n        },\n        \"ownerId\": \"1\",\n        \"visibility\": \"public\",\n        \"steps\": \"some steps\",\n        \"id\": \"b45bf5c7-6fb7-40d2-851f-6c9603d44f43\",\n        \"permissions\": [\n            \"read\",\n            \"update\",\n            \"delete\"\n        ],\n        \"lock\": \"4582c3dd-da81-4d99-b5f6-211395005c04\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "/v1/recipe/read",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZWNpcGUtdXNlcnMiLCJpc3MiOiJTYWxuaWtvZmZDb20iLCJncm91cHMiOlsiVVNFUiJdLCJpZCI6IjEiLCJleHAiOjIwODI3NTg0MDB9.QTi3QsbWmT_5wwYHMDdRF95KWH6a8X7FooXIKPDMMNk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"requestType\": \"read\",\n    \"requestId\": \"string\",\n    \"debug\": {\n        \"mode\": \"test\"\n    },\n    \"recipe\": {\n        \"recipe\": {\n            \"id\": \"68229266-985e-4188-9061-2a88fb51f999\"\n        }\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/v1/recipe/read",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"recipe",
+						"read"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "readSuccess",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"requestType\": \"read\",\n    \"requestId\": \"string\",\n    \"debug\": {\n        \"mode\": \"test\"\n    },\n    \"recipe\": {\n        \"recipe\": {\n            \"id\": \"68229266-985e-4188-9061-2a88fb51f999\"\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/v1/recipe/read",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"recipe",
+								"read"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 06:47:06 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Ktor/2.0.1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "434"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"responseType\": \"read\",\n    \"requestId\": \"string\",\n    \"result\": \"success\",\n    \"errors\": null,\n    \"recipe\": {\n        \"title\": \"Pie\",\n        \"description\": \"Pie with superhot pepper\",\n        \"requirements\": [\n            \"mix of beer\",\n            \"oil\",\n            \"beef\",\n            \"pepper\"\n        ],\n        \"duration\": {\n            \"duration\": \"30.30s\",\n            \"timeunit\": \"sec\"\n        },\n        \"ownerId\": \"1\",\n        \"visibility\": \"public\",\n        \"steps\": \"some steps\",\n        \"id\": \"68229266-985e-4188-9061-2a88fb51f999\",\n        \"permissions\": [\n            \"read\",\n            \"update\",\n            \"delete\"\n        ],\n        \"lock\": \"2eec0aa6-8346-47fa-98e8-2641a9a43d70\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "/v1/recipe/delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZWNpcGUtdXNlcnMiLCJpc3MiOiJTYWxuaWtvZmZDb20iLCJncm91cHMiOlsiVVNFUiJdLCJpZCI6IjEiLCJleHAiOjIwODI3NTg0MDB9.QTi3QsbWmT_5wwYHMDdRF95KWH6a8X7FooXIKPDMMNk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\": \"delete\",\n  \"requestId\": \"string\",\n  \"debug\":{\"mode\":\"test\"},\n  \"recipe\": {\n    \"recipe\": {\n      \"id\": \"9c25ae64-1cb3-402c-a299-416a0a4a0611\",\n      \"lock\": \"979b6dd1-df11-4ab8-a994-4b4be135d63b\"\n    }\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/v1/recipe/delete",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"recipe",
+						"delete"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "deleteError",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"requestType\": \"delete\",\n  \"requestId\": \"string\",\n  \"debug\":{\"mode\":\"test\"},\n  \"recipe\": {\n    \"recipe\": {\n      \"id\": \"68229266-985e-4188-9061-2a88fb51f999\",\n      \"lock\": \"2eec0aa6-8346-47fa-98e8-2641a9a43d70\"\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/v1/recipe/delete",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"recipe",
+								"delete"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 06:48:14 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Ktor/2.0.1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "331"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"responseType\": \"delete\",\n    \"requestId\": \"string\",\n    \"result\": \"error\",\n    \"errors\": [\n        {\n            \"code\": null,\n            \"group\": null,\n            \"field\": \"id\",\n            \"message\": \"Not Found\"\n        }\n    ],\n    \"recipe\": {\n        \"title\": null,\n        \"description\": null,\n        \"requirements\": null,\n        \"duration\": {\n            \"duration\": \"0.00s\",\n            \"timeunit\": \"sec\"\n        },\n        \"ownerId\": \"\",\n        \"visibility\": null,\n        \"steps\": \"\",\n        \"id\": null,\n        \"permissions\": null,\n        \"lock\": null\n    }\n}"
+				},
+				{
+					"name": "deleteSuccess",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"requestType\": \"delete\",\n  \"requestId\": \"string\",\n  \"debug\":{\"mode\":\"test\"},\n  \"recipe\": {\n    \"recipe\": {\n      \"id\": \"9c25ae64-1cb3-402c-a299-416a0a4a0611\",\n      \"lock\": \"979b6dd1-df11-4ab8-a994-4b4be135d63b\"\n    }\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/v1/recipe/delete",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"recipe",
+								"delete"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 06:53:26 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Ktor/2.0.1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "414"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"responseType\": \"delete\",\n    \"requestId\": \"string\",\n    \"result\": \"success\",\n    \"errors\": null,\n    \"recipe\": {\n        \"title\": \"Pie\",\n        \"description\": \"Pie with superhot pepper\",\n        \"requirements\": [\n            \"mix of beer\",\n            \"oil\",\n            \"beef\",\n            \"pepper\"\n        ],\n        \"duration\": {\n            \"duration\": \"30.30s\",\n            \"timeunit\": \"sec\"\n        },\n        \"ownerId\": \"1\",\n        \"visibility\": \"public\",\n        \"steps\": \"some steps\",\n        \"id\": \"9c25ae64-1cb3-402c-a299-416a0a4a0611\",\n        \"permissions\": null,\n        \"lock\": \"979b6dd1-df11-4ab8-a994-4b4be135d63b\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "/v1/recipe/search",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZWNpcGUtdXNlcnMiLCJpc3MiOiJTYWxuaWtvZmZDb20iLCJncm91cHMiOlsiVVNFUiJdLCJpZCI6IjEiLCJleHAiOjIwODI3NTg0MDB9.QTi3QsbWmT_5wwYHMDdRF95KWH6a8X7FooXIKPDMMNk",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"requestType\": \"search\",\n  \"requestId\": \"string\",\n  \"debug\": {\n      \"mode\": \"test\"\n  },\n  \"recipeFilter\": {\n    \"searchString\": \"Pie\"\n  }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/v1/recipe/search",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"recipe",
+						"search"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "searchSuccess",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"requestType\": \"search\",\n  \"requestId\": \"string\",\n  \"debug\": {\n      \"mode\": \"test\"\n  },\n  \"recipeFilter\": {\n    \"searchString\": \"Pie\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8080/v1/recipe/search",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"v1",
+								"recipe",
+								"search"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Vary",
+							"value": "Origin"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 06:54:15 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Ktor/2.0.1"
+						},
+						{
+							"key": "Content-Length",
+							"value": "417"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=UTF-8"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"responseType\": \"search\",\n    \"requestId\": \"string\",\n    \"result\": \"success\",\n    \"errors\": null,\n    \"recipes\": [\n        {\n            \"title\": \"Pie\",\n            \"description\": \"Pie with superhot pepper\",\n            \"requirements\": [\n                \"mix of beer\",\n                \"oil\",\n                \"beef\",\n                \"pepper\"\n            ],\n            \"duration\": {\n                \"duration\": \"30.30s\",\n                \"timeunit\": \"sec\"\n            },\n            \"ownerId\": \"1\",\n            \"visibility\": \"public\",\n            \"steps\": \"some steps\",\n            \"id\": \"c5e00ec5-a0bc-45e8-adb1-715b7910cff1\",\n            \"permissions\": null,\n            \"lock\": \"0206df26-aeca-4db3-b4f8-b6b6c6999fee\"\n        }\n    ]\n}"
+				}
+			]
+		}
+	]
+}

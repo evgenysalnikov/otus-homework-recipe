@@ -10,7 +10,7 @@ import io.ktor.server.routing.*
 internal fun Routing.v1(recipeService: RecipeService) {
     authenticate("auth-jwt") {
         route("v1") {
-            v1recipe(recipeService) { principal<JWTPrincipal>().toModel()}
+            v1recipe(recipeService) { principal<JWTPrincipal>().toModel() }
         }
     }
 }

@@ -59,7 +59,6 @@ class V1RecipeTestApiTest {
             )
             contentType(ContentType.Application.Json)
             addAuth()
-            println(recipeApiV1RequestSerialize(requestObj))
             setBody(recipeApiV1RequestSerialize(requestObj))
         }
 

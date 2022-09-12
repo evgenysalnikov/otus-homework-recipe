@@ -82,3 +82,10 @@ docker-compose -f dockers/docker-compose-kafka.yaml down
 ### Запуск ktor
 `./gradlew :recipe-app-ktor:dockerBuildImage`
 `docker-compose -f dockers/docker-compose-ktor.yaml up`
+
+### If kibana don`t start
+` curl --request DELETE 'http://localhost:9200/.kibana*'`
+
+### Tokens
+user1 - `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZWNpcGUtdXNlcnMiLCJpc3MiOiJTYWxuaWtvZmZDb20iLCJncm91cHMiOlsiVVNFUiJdLCJpZCI6IjEiLCJleHAiOjIwODI3NTg0MDB9.QTi3QsbWmT_5wwYHMDdRF95KWH6a8X7FooXIKPDMMNk`
+user2 - `eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJyZWNpcGUtdXNlcnMiLCJpc3MiOiJTYWxuaWtvZmZDb20iLCJncm91cHMiOlsiVVNFUiJdLCJpZCI6IjIiLCJleHAiOjIwODI3NTg0MDB9.vZ30MS5QXHIjXEmY14QT-e1lCd474b6YnuebV8OZizo`
