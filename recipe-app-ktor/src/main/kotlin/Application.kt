@@ -32,10 +32,17 @@ import org.slf4j.event.Level
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 
+fun Application.getKtorAuthConfig() : KtorAuthConfig = KtorAuthConfig(
+    secret = environment.config.property("jwt.secret").getString(),
+    issuer = environment.config.property("jwt.issuer").getString(),
+    audience = environment.config.property("jwt.audience").getString(),
+    realm = environment.config.property("jwt.realm").getString()
+)
+
 @OptIn(KtorExperimentalLocationsAPI::class)
 fun Application.module(
     settings: RecipeSettings? = null,
-    authConfig: KtorAuthConfig = KtorAuthConfig(environment)
+    authConfig: KtorAuthConfig = getKtorAuthConfig()
 ) {
     install(Routing)
     install(CachingHeaders)
