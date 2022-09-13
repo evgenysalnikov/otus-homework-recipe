@@ -19,7 +19,7 @@ fun principalUser(id: UserId = Pie.getModel().ownerId, banned: Boolean = false) 
 fun principalModer(id: UserId = Pie.getModel().ownerId, banned: Boolean = false) = RecipePrincipalModel(
     id = id,
     groups = setOf(
-        RecipeUserGroups.MODERATOR_MP,
+        RecipeUserGroups.MODERATOR,
         RecipeUserGroups.TEST,
         if (banned) RecipeUserGroups.BAN_RECIPE else null
     )

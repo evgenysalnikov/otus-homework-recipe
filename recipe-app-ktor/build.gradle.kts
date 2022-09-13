@@ -60,9 +60,10 @@ dependencies {
     implementation(ktor("auto-head-response"))
     implementation(ktor("cors")) // "io.ktor:ktor-cors:$ktorVersion"
     implementation(ktor("default-headers")) // "io.ktor:ktor-cors:$ktorVersion"
-    implementation(ktor("cors")) // "io.ktor:ktor-cors:$ktorVersion"
     implementation(ktor("auto-head-response"))
     implementation(ktor("websockets"))
+    implementation(ktor("auth"))
+    implementation(ktor("auth-jwt"))
 
     implementation(ktor("websockets")) // "io.ktor:ktor-websockets:$ktorVersion"
     // implementation(ktor("auth")) // "io.ktor:ktor-auth:$ktorVersion"
@@ -80,6 +81,11 @@ dependencies {
     implementation(project(":recipe-repo-inmemory"))
     implementation(project(":recipe-repo-gremlin"))
     implementation(project(":recipe-repo-sql"))
+
+    testImplementation(kotlin("test-junit"))
+    testImplementation(ktor("test-host")) // "io.ktor:ktor-server-test-host:$ktorVersion"
+    testImplementation(ktor("content-negotiation", prefix = "client-"))
+    testImplementation(ktor("websockets", prefix = "client-"))
 
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")

@@ -1,8 +1,12 @@
 package com.salnikoff.recipe.app.ktor
 
+import com.auth0.jwt.JWT
+import com.auth0.jwt.algorithms.Algorithm
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.salnikoff.recipe.app.ktor.api.v1
+import com.salnikoff.recipe.app.ktor.config.KtorAuthConfig
+import com.salnikoff.recipe.app.ktor.config.KtorAuthConfig.Companion.GROUPS_CLAIM
 import com.salnikoff.recipe.backend.services.RecipeService
 import com.salnikoff.recipe.common.models.RecipeSettings
 import com.salnikoff.recipe.repo.inmemory.RecipeRepoInMemory
@@ -10,6 +14,8 @@ import com.salnikoff.recipe.repo.sql.RecipeRepoSQL
 import io.ktor.http.*
 import io.ktor.serialization.jackson.*
 import io.ktor.server.application.*
+import io.ktor.server.auth.*
+import io.ktor.server.auth.jwt.*
 import io.ktor.server.http.content.*
 import io.ktor.server.locations.*
 import io.ktor.server.plugins.autohead.*
@@ -26,9 +32,17 @@ import org.slf4j.event.Level
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 
+fun Application.getKtorAuthConfig() : KtorAuthConfig = KtorAuthConfig(
+    secret = environment.config.property("jwt.secret").getString(),
+    issuer = environment.config.property("jwt.issuer").getString(),
+    audience = environment.config.property("jwt.audience").getString(),
+    realm = environment.config.property("jwt.realm").getString()
+)
+
 @OptIn(KtorExperimentalLocationsAPI::class)
 fun Application.module(
-    settings: RecipeSettings? = null
+    settings: RecipeSettings? = null,
+    authConfig: KtorAuthConfig = getKtorAuthConfig()
 ) {
     install(Routing)
     install(CachingHeaders)
@@ -69,6 +83,28 @@ fun Application.module(
     }
 
     val recipeService = RecipeService(corSettings)
+
+    install(Authentication) {
+        jwt("auth-jwt") {
+            realm = authConfig.realm
+            verifier(
+                JWT
+                    .require(Algorithm.HMAC256(authConfig.secret))
+                    .withAudience(authConfig.audience)
+                    .withIssuer(authConfig.issuer)
+                    .build()
+            )
+            validate { jwtCredential: JWTCredential ->
+                when {
+                    jwtCredential.payload.getClaim(GROUPS_CLAIM).asList(String::class.java).isNullOrEmpty() -> {
+                        this@module.log.error("Groups claim must not be empty in JWT token")
+                        null
+                    }
+                    else -> JWTPrincipal(jwtCredential.payload)
+                }
+            }
+        }
+    }
 
     routing {
         get("/") {
