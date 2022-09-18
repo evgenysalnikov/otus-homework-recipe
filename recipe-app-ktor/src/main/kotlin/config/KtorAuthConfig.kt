@@ -8,7 +8,6 @@ data class KtorAuthConfig(
     val audience: String,
     val realm: String,
 ) {
-
     companion object {
         const val ID_CLAIM = "id"
         const val GROUPS_CLAIM = "groups"

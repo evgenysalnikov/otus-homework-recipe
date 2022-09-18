@@ -82,6 +82,10 @@ dependencies {
     implementation(project(":recipe-repo-gremlin"))
     implementation(project(":recipe-repo-sql"))
 
+    implementation(project(":recipe-logging"))
+    implementation(project(":recipe-logs-mapper"))
+    implementation(project(":recipe-api-logs"))
+
     testImplementation(kotlin("test-junit"))
     testImplementation(ktor("test-host")) // "io.ktor:ktor-server-test-host:$ktorVersion"
     testImplementation(ktor("content-negotiation", prefix = "client-"))

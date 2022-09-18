@@ -3,3 +3,5 @@
 .DS_Store
 **/build/
 /dockers/kfdata/
+/dockers/elk-stack/volumes/esdata/
+/dockers/elk-stack/volumes/kfdata/

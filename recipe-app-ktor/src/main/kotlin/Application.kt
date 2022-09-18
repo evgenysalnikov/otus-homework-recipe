@@ -78,7 +78,8 @@ fun Application.module(
     val corSettings by lazy {
         settings ?: RecipeSettings(
             repoTest = RecipeRepoInMemory(),
-            repoProd = RecipeRepoSQL(url = "jdbc:postgresql://sql:5432/recipedb")
+//            repoProd = RecipeRepoSQL(url = "jdbc:postgresql://sql:5432/recipedb")
+            repoProd = RecipeRepoSQL(url = "jdbc:postgresql://localhost:5432/recipedb")
         )
     }
 
