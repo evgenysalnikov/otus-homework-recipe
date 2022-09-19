@@ -16,7 +16,7 @@ class RecipeRepoSQL(
     password: String = "recipe-pass",
     schema: String = "recipe",
     initObjects: Collection<Recipe> = emptyList(),
-    private val newRecipeUpdateLock: RecipeLock = RecipeLock(UUID.randomUUID().toString())
+    private val newRecipeUpdateLock: RecipeLock? = null
 ) : IRecipeRepository {
 
     private val db by lazy {
@@ -113,6 +113,8 @@ class RecipeRepoSQL(
             val res = RecipeTable.insert {
                 if (item.id != RecipeId.NONE) {
                     it[id] = item.id.asString()
+                } else {
+                    it[id] = generateUuidAsStringFixedSize()
                 }
                 it[title] = item.title
                 it[description] = item.description
@@ -177,7 +179,7 @@ class RecipeRepoSQL(
         val key = rq.recipe.id.takeIf { it != RecipeId.NONE }?.asString() ?: return resultErrorEmptyId
         val oldLock = rq.recipe.lock.takeIf { it != RecipeLock.NONE }?.asString()
 //        val newRecipe = rq.recipe.copy(lock = RecipeLock(UUID.randomUUID().toString()))
-        val newRecipe = rq.recipe.copy(lock = newRecipeUpdateLock)
+        val newRecipe = rq.recipe.copy(lock = newRecipeUpdateLock.takeIf { it != null } ?: RecipeLock(UUID.randomUUID().toString()))
 
         return mutex.withLock {
             safeTransaction({

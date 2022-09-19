@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+[Transport models] -- [Mappers]
+[Mappers] -- [Independent inside logic]
+
+
+package "Frameworks" {
+    [REST] .. [Ktor]
+}
+
+[Ktor] -- [Transport models]
+[Ktor] -- [Independent inside logic]
+
+package "Transport models" {
+    [Version 1]
+}
+
+package "Independent inside logic" {
+    [Internal Models]
+    [Biz logics]
+}
+
+[Biz logics] -- [Storage]
+
+package "Storage" {
+    [InMemory]
+    Cloud "ArcadeDb"
+    Database "SQL"
+}
+
+package "Logging" {
+    [RecipeLogger]
+}
+
+[Ktor] - [RecipeLogger]
+[RecipeLogger] - ELK
+
+@enduml

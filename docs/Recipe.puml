@@ -1,0 +1,95 @@
+@startuml
+'https://plantuml.com/component-diagram
+"User"
+package "WEB" {
+  User <-> [Ktor]#Red : Http
+}
+note top of Ktor
+    Routing,
+    JWT validation and decoding,
+    Controllers,
+    Logs by own Logger
+endnote
+
+node "Kafka" {
+[RequestTopic]
+[ResponseTopic]
+[LogsTopic]
+}
+
+package "Mappers" {
+[Ktor] <--> [ApiV1Mapper]#Red: String
+}
+
+interface "RepositoryInterface"
+package "Biz" {
+[ApiV1Mapper] <-> [Service]#Red : RecipeContext
+Service <--> RepositoryInterface
+[RepositoryInterface] <--> Repo
+}
+note top of Service
+    All business logic
+    like validation, auth, crud etc
+    using COR
+endnote
+
+()"AnotherApp" --> RequestTopic#Blue : json string
+RequestTopic ..> [KafkaApp]#Blue
+[KafkaApp] <.. [ApiV1Mapper]#Blue
+KafkaApp <..> [Service]#Blue: "Request / Response"
+KafkaApp ..> [ResponseTopic]#Blue: Send response
+ResponseTopic --> ()"AnotherApp"#Blue
+note top of ApiV1Mapper
+    Deserialize request from json
+    Serialize response to json
+endnote
+
+note top of KafkaApp
+    Got request from Request topic,
+    deserialize, send RecipeContext to
+    Business logic, fetch response, serialize it
+    and send to the Response topic
+endnote
+
+node "ELK" {
+[Elastic]
+[LogStash]
+[Kibana]
+}
+
+()"LoggerInterface"
+
+[Ktor] --> LoggerInterface: Logging data
+LoggerInterface --> [Logger]
+[Logger] --> [LoggerMapper]
+[LoggerMapper] --> LogsTopic
+LogsTopic --> LogStash
+LogStash --> [Elastic]
+Elastic --> Kibana
+Kibana --> ()"UX Dashboard"
+
+note top of LoggerMapper
+    Transform logs to json
+endnote
+
+note top of Logger
+    Generate metrics, catch logs
+    and send them to Kafka
+endnote
+
+package "Repo" {
+["RepoInMemory"]
+["RepoGremlin"] <--> ArcadeDB
+["RepoSql"] <--> [Postgres]
+}
+
+database "Postgres" {
+  folder "recipeDB" {
+  }
+}
+
+node "ArcadeDB" {
+["Gremlin"]
+}
+
+@enduml
