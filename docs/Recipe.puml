@@ -17,8 +17,13 @@ node "Kafka" {
 [LogsTopic]
 }
 
+package "Transport models" {
+    [Transport V1]
+}
+
 package "Mappers" {
-[Ktor] <--> [ApiV1Mapper]#Red: String
+[Transport V1] <--> [ApiV1Mapper]#Red
+[Ktor] <--> [Transport V1]#Red: String
 }
 
 interface "RepositoryInterface"
@@ -59,7 +64,7 @@ node "ELK" {
 
 ()"LoggerInterface"
 
-[Ktor] --> LoggerInterface: Logging data
+[Ktor] -> LoggerInterface: Logging data
 LoggerInterface --> [Logger]
 [Logger] --> [LoggerMapper]
 [LoggerMapper] --> LogsTopic

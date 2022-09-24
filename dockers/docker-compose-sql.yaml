@@ -1,0 +1,12 @@
+version: "3.3"
+services:
+
+  sql:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: recipe
+      POSTGRES_PASSWORD: recipe-pass
+      POSTGRES_DB: recipedb
+
