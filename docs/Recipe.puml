@@ -23,12 +23,14 @@ package "Transport models" {
 
 package "Mappers" {
 [Transport V1] <--> [ApiV1Mapper]#Red
-[Ktor] <--> [Transport V1]#Red: String
+[Ktor] <--> [Transport V1]#Red
 }
 
 interface "RepositoryInterface"
 package "Biz" {
-[ApiV1Mapper] <-> [Service]#Red : RecipeContext
+[Internal Models] <-> [Service]#Red : RecipeContext
+[ApiV1Mapper] <-> [Internal Models]#Red : RecipeContext
+[Internal Models]
 Service <--> RepositoryInterface
 [RepositoryInterface] <--> Repo
 }
